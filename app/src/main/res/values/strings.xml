@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">FlickrApp</string>
+    <string name="app_name">FlickrClone</string>
+    <string name="fli">fli</string>
+    <string name="ckr">ckr</string>
+    <string name="FACEBOOK_APP_ID">1737430546555998</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN">9f0126aa6f3035007fe0e7f2da02d797</string>
+    <string name="ak_login_protocol_scheme">ak1737430546555998</string>
+
+    <!-- LoginActivity -->
+    <string name="phone_login_button">Login with phone number</string>
+    <string name="email_login_button">Login with email</string>
+    <string name="later_login">LATER!</string>
 </resources>

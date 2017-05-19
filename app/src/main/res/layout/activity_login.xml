@@ -1,13 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_login_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.estebanmoncaleano.flickrapp.LoginActivity">
+    android:layout_margin="@dimen/margin_app"
+    tools:context="com.estebanmoncaleano.flickrclone.LoginActivity">
 
     <TextView
+        android:id="@+id/tv_brand_fli"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:text="@string/fli"
+        android:textColor="@color/colorPrimary"
+        android:textSize="50sp"
+        android:fontFamily="@font/lato_bold"/>
+
+    <TextView
+        android:id="@+id/tv_brand_ckr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ckr"
+        android:textColor="@color/colorAccent"
+        android:textSize="50sp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/tv_brand_fli"
+        android:layout_toEndOf="@+id/tv_brand_fli"
+        android:fontFamily="@font/lato_bold"/>
+
+    <Button
+        android:id="@+id/bt_login_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bt_login_email"
+        android:layout_marginTop="@dimen/button_margin"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/lato_bold"
+        android:onClick="onPhoneLogin"
+        android:text="@string/phone_login_button"
+        android:textColor="@color/colorText" />
+
+    <Button
+        android:id="@+id/bt_login_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_login_later"
+        android:layout_marginTop="@dimen/button_margin"
+        android:background="@color/colorAccent"
+        android:fontFamily="@font/lato_bold"
+        android:onClick="onEmailLogin"
+        android:text="@string/email_login_button"
+        android:textColor="@color/colorText" />
+
+    <TextView
+        android:id="@+id/tv_login_later"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/button_margin"
+        android:fontFamily="@font/lato_bold"
+        android:gravity="center"
+        android:onClick="onLaterLogin"
+        android:text="@string/later_login"
+        android:textColor="@color/colorPrimaryText"
+        android:textStyle="bold" />
 
 </RelativeLayout>

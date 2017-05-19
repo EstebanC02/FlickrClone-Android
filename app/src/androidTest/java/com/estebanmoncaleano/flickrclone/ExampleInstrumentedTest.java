@@ -1,4 +1,4 @@
-package com.estebanmoncaleano.flickrapp;
+package com.estebanmoncaleano.flickrclone;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.estebanmoncaleano.flickrapp", appContext.getPackageName());
+        assertEquals("com.estebanmoncaleano.flickrclone", appContext.getPackageName());
     }
 }

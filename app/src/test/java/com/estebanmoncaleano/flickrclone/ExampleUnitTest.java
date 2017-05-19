@@ -1,4 +1,4 @@
-package com.estebanmoncaleano.flickrapp;
+package com.estebanmoncaleano.flickrclone;
 
 import org.junit.Test;
 
