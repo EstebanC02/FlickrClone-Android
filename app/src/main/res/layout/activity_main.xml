@@ -1,8 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_main_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/margin_app"
     tools:context="com.estebanmoncaleano.flickrclone.MainActivity">
+
+    <TextView
+        android:id="@+id/tv_brand_flick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/flick"
+        android:textColor="@color/colorPrimary"
+        android:textSize="50sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_brand_r"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/tv_brand_flick"
+        android:layout_toRightOf="@+id/tv_brand_flick"
+        android:text="@string/r"
+        android:textColor="@color/colorAccent"
+        android:textSize="50sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_brand_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tv_brand_flick"
+        android:layout_marginTop="32dp"
+        android:text="@string/flick_logo"
+        android:textSize="30sp" />
+
+    <Spinner
+        android:id="@+id/sp_type_search"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spinner_height"
+        android:layout_centerInParent="true" />
+
+    <EditText
+        android:id="@+id/et_value_search"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edit_text_height"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/sp_type_search"
+        android:layout_marginTop="@dimen/margin_text"
+        android:ems="10"
+        android:hint="@string/hint_input_text"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/bt_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/button_margin"
+        android:background="@color/colorPrimary"
+        android:onClick="onSearch"
+        android:text="@string/button_search"
+        android:textColor="@color/colorText" />
 
 </RelativeLayout>

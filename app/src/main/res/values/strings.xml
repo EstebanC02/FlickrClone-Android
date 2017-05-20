@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">FlickrClone</string>
-    <string name="fli">fli</string>
-    <string name="ckr">ckr</string>
+    <string name="flick">flick</string>
+    <string name="r">r</string>
+    <string name="flick_logo">Find your inspiration…</string>
     <string name="FACEBOOK_APP_ID">1737430546555998</string>
     <string name="ACCOUNT_KIT_CLIENT_TOKEN">9f0126aa6f3035007fe0e7f2da02d797</string>
     <string name="ak_login_protocol_scheme">ak1737430546555998</string>
@@ -10,4 +11,8 @@
     <string name="phone_login_button">Login with phone number</string>
     <string name="email_login_button">Login with email</string>
     <string name="later_login">LATER!</string>
+
+    <!-- MainActivity -->
+    <string name="button_search">Search</string>
+    <string name="hint_input_text">Photos, people, or groups</string>
 </resources>
