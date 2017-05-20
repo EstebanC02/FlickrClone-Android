@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.estebanmoncaleano.flickrclone.utils.FontHelper;
 import com.facebook.accountkit.AccessToken;
 import com.facebook.accountkit.AccountKit;
 import com.facebook.accountkit.AccountKitLoginResult;
@@ -29,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
             launchAccountActivity();
 
         loginFormView = findViewById(R.id.rl_login_view);
+        FontHelper.setCustomTypeface(loginFormView);
     }
 
     private void onLogin(final LoginType loginType) {
