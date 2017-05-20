@@ -63,11 +63,22 @@
         android:id="@+id/bt_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/bt_show_recent"
         android:layout_marginTop="@dimen/button_margin"
         android:background="@color/colorPrimary"
         android:onClick="onSearch"
         android:text="@string/button_search"
+        android:textColor="@color/colorText" />
+
+    <Button
+        android:id="@+id/bt_show_recent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/button_margin"
+        android:background="@color/colorAccent"
+        android:onClick="onShowRecent"
+        android:text="@string/button_show_recent"
         android:textColor="@color/colorText" />
 
 </RelativeLayout>

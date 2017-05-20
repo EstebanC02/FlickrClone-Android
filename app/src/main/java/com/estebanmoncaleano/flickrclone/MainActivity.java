@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import com.estebanmoncaleano.flickrclone.utils.FontHelper;
+import com.estebanmoncaleano.flickrclone.utilties.FontHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,5 +25,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSearch(View view) {
+    }
+
+    public void onShowRecent(View view) {
     }
 }

@@ -15,4 +15,5 @@
     <!-- MainActivity -->
     <string name="button_search">Search</string>
     <string name="hint_input_text">Photos, people, or groups</string>
+    <string name="button_show_recent">Show me recent photos</string>
 </resources>
