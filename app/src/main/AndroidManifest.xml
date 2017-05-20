@@ -45,6 +45,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
+
+        <provider
+            android:name=".data.database.FlickrContentProvider"
+            android:authorities="com.estebanmoncaleano.flickrclone"
+            android:exported="false" />
+
     </application>
 
 </manifest>

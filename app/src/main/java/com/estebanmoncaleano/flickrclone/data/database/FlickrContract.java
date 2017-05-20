@@ -1,0 +1,60 @@
+package com.estebanmoncaleano.flickrclone.data.database;
+
+import android.net.Uri;
+import android.provider.BaseColumns;
+
+public class FlickrContract {
+
+    public static final String AUTHORITY = "com.estebanmoncaleano.flickrclone";
+    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + AUTHORITY);
+    public static final String PATH_PHOTOS = "photos";
+    public static final String PATH_PERSONS = "persons";
+    public static final String PATH_GROUPS = "groups";
+
+    public static final class PhotoListEntry implements BaseColumns {
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_PHOTOS).build();
+
+        public static final String TABLE_NAME = "PhotoList";
+
+        public static final String OWNER = "owner";
+        public static final String SECRET = "secret";
+        public static final String SERVER = "server";
+        public static final String FARM = "farm";
+        public static final String TITLE = "title";
+    }
+
+    public static final class PersonListEntry implements BaseColumns {
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_PERSONS).build();
+
+        public static final String TABLE_NAME = "PersonList";
+
+        public static final String USERNAME = "username";
+        public static final String NSID = "nsid";
+        public static final String REALNAME = "realname";
+        public static final String LOCATION = "location";
+        public static final String DESCRIPTION = "description";
+        public static final String PHOTO_URL = "photosurl";
+        public static final String PROFILE_URL = "profileurl";
+        public static final String MOBILE_URL = "mobileurl";
+        public static final String FIRST_DATE_TAKEN = "firstdatetaken";
+        public static final String COUNT = "count";
+    }
+
+    public static final class GroupListEntry implements BaseColumns {
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_GROUPS).build();
+
+        public static final String TABLE_NAME = "GroupList";
+
+        public static final String NAME = "name";
+        public static final String DESCRIPTION = "description";
+        public static final String RULES = "rules";
+        public static final String MEMBERS = "members";
+        public static final String TOPIC_COUNT = "topic_count";
+    }
+}
