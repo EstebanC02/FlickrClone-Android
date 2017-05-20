@@ -49,15 +49,10 @@ public class FlickrContract {
         public static final String TABLE_NAME = "PersonList";
 
         public static final String USERNAME = "username";
-        public static final String NSID = "nsid";
         public static final String REALNAME = "realname";
         public static final String LOCATION = "location";
         public static final String DESCRIPTION = "description";
         public static final String PHOTO_URL = "photosurl";
-        public static final String PROFILE_URL = "profileurl";
-        public static final String MOBILE_URL = "mobileurl";
-        public static final String FIRST_DATE_TAKEN = "firstdatetaken";
-        public static final String COUNT = "count";
     }
 
     public static final class GroupListEntry implements BaseColumns {

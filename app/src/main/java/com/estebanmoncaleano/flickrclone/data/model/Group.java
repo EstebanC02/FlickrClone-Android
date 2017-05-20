@@ -1,7 +1,7 @@
 package com.estebanmoncaleano.flickrclone.data.model;
 
 public class Group {
-    private int id;
+    private String id;
     private String name;
     private String description;
     private String rules;
@@ -11,7 +11,7 @@ public class Group {
     public Group() {
     }
 
-    public Group(int id, String name, String description, String rules, int members, int topics) {
+    public Group(String id, String name, String description, String rules, int members, int topics) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -20,11 +20,11 @@ public class Group {
         this.topics = topics;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -129,7 +129,7 @@ public class FlickrContentProvider extends ContentProvider {
 
             case COMMENT:
                 retCursor = db.query(
-                        FlickrContract.PhotoListEntry.TABLE_NAME,
+                        FlickrContract.CommentListEntry.TABLE_NAME,
                         projection,
                         selection,
                         selectionArgs,
@@ -146,7 +146,7 @@ public class FlickrContentProvider extends ContentProvider {
                 String[] selectionCommentArgs = new String[]{id};
 
                 retCursor = db.query(
-                        FlickrContract.PhotoListEntry.TABLE_NAME,
+                        FlickrContract.CommentListEntry.TABLE_NAME,
                         projection,
                         selectionComment,
                         selectionCommentArgs,
@@ -309,7 +309,7 @@ public class FlickrContentProvider extends ContentProvider {
 
                 try {
                     for (ContentValues value : values) {
-                        long id = db.insert(FlickrContract.PhotoListEntry.TABLE_NAME, null, value);
+                        long id = db.insert(FlickrContract.CommentListEntry.TABLE_NAME, null, value);
                         if (id != -1) rowsCommentInserted++;
                     }
                     db.setTransactionSuccessful();
@@ -386,7 +386,7 @@ public class FlickrContentProvider extends ContentProvider {
             case COMMENT:
                 // directory
                 int rowsCommentDeleted = db.delete(
-                        FlickrContract.PhotoListEntry.TABLE_NAME,
+                        FlickrContract.CommentListEntry.TABLE_NAME,
                         selection,
                         selectionArgs
                 );
@@ -430,6 +430,67 @@ public class FlickrContentProvider extends ContentProvider {
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection,
                       @Nullable String[] selectionArgs) {
-        return 0;
+
+        final SQLiteDatabase db = flickrDBHelper.getWritableDatabase();
+
+        switch (uriMatcher.match(uri)) {
+            case PHOTO:
+                int rowsPhotoUpdated = db.update(
+                        FlickrContract.PhotoListEntry.TABLE_NAME,
+                        values,
+                        selection,
+                        selectionArgs
+                );
+
+                if (rowsPhotoUpdated > 0)
+                    if (getContext() != null)
+                        getContext().getContentResolver().notifyChange(uri, null);
+                return rowsPhotoUpdated;
+
+            case COMMENT:
+                // directory
+                int rowsCommentUpdated = db.update(
+                        FlickrContract.CommentListEntry.TABLE_NAME,
+                        values,
+                        selection,
+                        selectionArgs
+                );
+
+                if (rowsCommentUpdated > 0)
+                    if (getContext() != null)
+                        getContext().getContentResolver().notifyChange(uri, null);
+                return rowsCommentUpdated;
+
+            case PERSON:
+                // directory
+                int rowsPersonUpdated = db.update(
+                        FlickrContract.PersonListEntry.TABLE_NAME,
+                        values,
+                        selection,
+                        selectionArgs
+                );
+
+                if (rowsPersonUpdated > 0)
+                    if (getContext() != null)
+                        getContext().getContentResolver().notifyChange(uri, null);
+                return rowsPersonUpdated;
+
+            case GROUP:
+                // directory
+                int rowsGroupUpdated = db.update(
+                        FlickrContract.GroupListEntry.TABLE_NAME,
+                        values,
+                        selection,
+                        selectionArgs
+                );
+
+                if (rowsGroupUpdated > 0)
+                    if (getContext() != null)
+                        getContext().getContentResolver().notifyChange(uri, null);
+                return rowsGroupUpdated;
+
+            default:
+                throw new UnsupportedOperationException("Unknown uri: " + uri);
+        }
     }
 }

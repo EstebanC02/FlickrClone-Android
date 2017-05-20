@@ -42,15 +42,10 @@ public class FlickrDBHelper extends SQLiteOpenHelper {
                 FlickrContract.PersonListEntry.TABLE_NAME + "( " +
                 FlickrContract.PersonListEntry._ID + " TEXT PRIMARY KEY, " +
                 FlickrContract.PersonListEntry.USERNAME + " TEXT NOT NULL, " +
-                FlickrContract.PersonListEntry.NSID + " TEXT NOT NULL, " +
                 FlickrContract.PersonListEntry.REALNAME + " TEXT NOT NULL, " +
                 FlickrContract.PersonListEntry.LOCATION + " TEXT NOT NULL, " +
                 FlickrContract.PersonListEntry.DESCRIPTION + " TEXT NOT NULL, " +
-                FlickrContract.PersonListEntry.PHOTO_URL + " TEXT NOT NULL, " +
-                FlickrContract.PersonListEntry.PROFILE_URL + " TEXT NOT NULL, " +
-                FlickrContract.PersonListEntry.MOBILE_URL + " TEXT NOT NULL, " +
-                FlickrContract.PersonListEntry.FIRST_DATE_TAKEN + " TEXT NOT NULL, " +
-                FlickrContract.PersonListEntry.COUNT + " INTEGER NOT NULL);";
+                FlickrContract.PersonListEntry.PHOTO_URL + " TEXT NOT NULL);";
 
         db.execSQL(SQL_CREATE_PERSON_LIST_TABLE);
 
