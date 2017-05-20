@@ -16,7 +16,7 @@ import com.facebook.accountkit.ui.LoginType;
 
 public class LoginActivity extends AppCompatActivity {
 
-    public static int APP_REQUEST_CODE = 1;
+    public static final int APP_REQUEST_CODE = 1;
 
     private View loginFormView;
 
