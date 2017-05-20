@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="search_type_array">
+        <item>Photos, people, or groups</item>
         <item>Photo</item>
         <item>People</item>
         <item>Groups</item>

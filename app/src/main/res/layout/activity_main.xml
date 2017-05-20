@@ -4,7 +4,7 @@
     android:id="@+id/rl_main_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/margin_app"
+    android:padding="@dimen/margin_app"
     tools:context="com.estebanmoncaleano.flickrclone.MainActivity">
 
     <TextView
@@ -32,12 +32,10 @@
         android:id="@+id/tv_brand_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tv_brand_flick"
-        android:layout_marginTop="32dp"
+        android:layout_above="@+id/sp_type_search"
         android:text="@string/flick_logo"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:layout_marginBottom="10dp"/>
 
     <Spinner
         android:id="@+id/sp_type_search"
@@ -54,7 +52,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/sp_type_search"
-        android:layout_marginTop="@dimen/margin_text"
         android:ems="10"
         android:hint="@string/hint_input_text"
         android:inputType="textPersonName" />

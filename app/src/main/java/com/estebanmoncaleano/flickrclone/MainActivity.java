@@ -1,14 +1,21 @@
 package com.estebanmoncaleano.flickrclone;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.estebanmoncaleano.flickrclone.utilties.FontHelper;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Spinner spinner;
+    private EditText searchValue;
+    private View mainFormView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +24,9 @@ public class MainActivity extends AppCompatActivity {
 
         FontHelper.setCustomTypeface(findViewById(R.id.rl_main_view));
 
-        Spinner spinner = (Spinner) findViewById(R.id.sp_type_search);
+        mainFormView = findViewById(R.id.rl_main_view);
+        searchValue = (EditText) findViewById(R.id.et_value_search);
+        spinner = (Spinner) findViewById(R.id.sp_type_search);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this, R.array.search_type_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -25,8 +34,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSearch(View view) {
+        if(spinner.getSelectedItemPosition() == 0)
+            showMessage(getString(R.string.spinner_message_error));
+        else if (searchValue.getText().toString().isEmpty())
+            searchValue.setError(getString(R.string.edit_text_message_error));
+        else if(spinner.getSelectedItemPosition() == 1)
+            launchSearchPhoto(searchValue.getText().toString());
+        else if (spinner.getSelectedItemPosition() == 2)
+            launchSearchPeople(searchValue.getText().toString());
+        else if (spinner.getSelectedItemPosition() == 3)
+            launchSearchGroup(searchValue.getText().toString());
     }
 
     public void onShowRecent(View view) {
+    }
+
+    private void launchSearchPhoto(String searchPhoto) {
+    }
+
+    private void launchSearchPeople(String searchPeople) {
+    }
+
+    private void launchSearchGroup(String searchGroup) {
+    }
+
+    private void showMessage(String message) {
+        Snackbar.make(mainFormView, message, Snackbar.LENGTH_LONG).show();
     }
 }

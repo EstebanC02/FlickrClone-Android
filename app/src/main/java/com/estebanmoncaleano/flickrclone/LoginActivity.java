@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
 
         AccessToken accessToken = AccountKit.getCurrentAccessToken();
         if (accessToken != null)
-            launchAccountActivity();
+            launchMainActivity();
 
         loginFormView = findViewById(R.id.rl_login_view);
         FontHelper.setCustomTypeface(loginFormView);
@@ -53,11 +53,9 @@ public class LoginActivity extends AppCompatActivity {
             AccountKitLoginResult loginResult = data.getParcelableExtra(AccountKitLoginResult.RESULT_KEY);
             if (loginResult.getError() != null) {
                 String errorMessage = loginResult.getError().getErrorType().getMessage();
-                Snackbar.make(loginFormView,
-                        errorMessage,
-                        Snackbar.LENGTH_LONG).show();
+                showMessage(errorMessage);
             } else if (loginResult.getAccessToken() != null) {
-                launchAccountActivity();
+                launchMainActivity();
             }
         }
     }
@@ -71,12 +69,16 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onLaterLogin(View view) {
-        launchAccountActivity();
+        launchMainActivity();
     }
 
-    private void launchAccountActivity() {
+    private void launchMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void showMessage(String message) {
+        Snackbar.make(loginFormView, message, Snackbar.LENGTH_LONG).show();
     }
 }

@@ -13,4 +13,6 @@
     <string name="button_search">Search</string>
     <string name="hint_input_text">Photos, people, or groups</string>
     <string name="button_show_recent">Show me recent photos</string>
+    <string name="spinner_message_error">Please selected a item from de spinner</string>
+    <string name="edit_text_message_error">Please insert a valid value</string>
 </resources>
