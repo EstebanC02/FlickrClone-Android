@@ -8,6 +8,7 @@ public class FlickrContract {
     public static final String AUTHORITY = "com.estebanmoncaleano.flickrclone";
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + AUTHORITY);
     public static final String PATH_PHOTOS = "photos";
+    public static final String PATH_COMMENTS = "comments";
     public static final String PATH_PERSONS = "persons";
     public static final String PATH_GROUPS = "groups";
 
@@ -23,6 +24,21 @@ public class FlickrContract {
         public static final String SERVER = "server";
         public static final String FARM = "farm";
         public static final String TITLE = "title";
+        public static final String DESCRIPTION = "description";
+        public static final String DATE = "date";
+    }
+
+    public static final class CommentListEntry implements BaseColumns {
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_COMMENTS).build();
+
+        public static final String TABLE_NAME = "CommentList";
+
+        public static final String PHOTO_ID = "photo_id";
+        public static final String AUTHOR = "author";
+        public static final String AUTHOR_NAME = "authorname";
+        public static final String MESSAGE = "farm";
     }
 
     public static final class PersonListEntry implements BaseColumns {

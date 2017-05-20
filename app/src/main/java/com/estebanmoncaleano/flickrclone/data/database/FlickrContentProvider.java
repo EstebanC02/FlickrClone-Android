@@ -13,13 +13,14 @@ import android.support.annotation.Nullable;
 
 public class FlickrContentProvider extends ContentProvider {
 
-    private static final String TAG = FlickrContentProvider.class.getSimpleName();
     public static final int PHOTO = 100;
     public static final int PHOTO_WITH_ID = 101;
     public static final int PERSON = 200;
     public static final int PERSON_WITH_ID = 201;
     public static final int GROUP = 300;
     public static final int GROUP_WITH_ID = 301;
+    public static final int COMMENT = 400;
+    public static final int COMMENT_WITH_ID = 401;
 
     private static final UriMatcher uriMatcher = buildUriMatcher();
 
@@ -28,11 +29,13 @@ public class FlickrContentProvider extends ContentProvider {
 
         // Directories
         uriMatcher.addURI(FlickrContract.AUTHORITY, FlickrContract.PATH_PHOTOS, PHOTO);
+        uriMatcher.addURI(FlickrContract.AUTHORITY, FlickrContract.PATH_COMMENTS, COMMENT);
         uriMatcher.addURI(FlickrContract.AUTHORITY, FlickrContract.PATH_PERSONS, PERSON);
         uriMatcher.addURI(FlickrContract.AUTHORITY, FlickrContract.PATH_GROUPS, GROUP);
 
         // Single Item
         uriMatcher.addURI(FlickrContract.AUTHORITY, FlickrContract.PATH_PHOTOS + "/#", PHOTO_WITH_ID);
+        uriMatcher.addURI(FlickrContract.AUTHORITY, FlickrContract.PATH_COMMENTS + "/#", COMMENT_WITH_ID);
         uriMatcher.addURI(FlickrContract.AUTHORITY, FlickrContract.PATH_PERSONS + "/#", PERSON_WITH_ID);
         uriMatcher.addURI(FlickrContract.AUTHORITY, FlickrContract.PATH_GROUPS + "/#", GROUP_WITH_ID);
 
@@ -58,6 +61,14 @@ public class FlickrContentProvider extends ContentProvider {
             case PHOTO_WITH_ID:
                 // single item type
                 return "vnd.android.cursor.item" + "/" + FlickrContract.AUTHORITY + "/" + FlickrContract.PATH_PHOTOS;
+
+            case COMMENT:
+                // directory
+                return "vnd.android.cursor.dir" + "/" + FlickrContract.AUTHORITY + "/" + FlickrContract.PATH_COMMENTS;
+            case COMMENT_WITH_ID:
+                // single item type
+                return "vnd.android.cursor.item" + "/" + FlickrContract.AUTHORITY + "/" + FlickrContract.PATH_COMMENTS;
+
 
             case PERSON:
                 // directory
@@ -102,14 +113,43 @@ public class FlickrContentProvider extends ContentProvider {
             case PHOTO_WITH_ID:
                 id = uri.getPathSegments().get(1);
 
-                String mSelectionApp = "_id?";
-                String[] mSelectionAppArgs = new String[]{id};
+                String selectionApp = "_id?";
+                String[] selectionAppArgs = new String[]{id};
 
                 retCursor = db.query(
                         FlickrContract.PhotoListEntry.TABLE_NAME,
                         projection,
-                        mSelectionApp,
-                        mSelectionAppArgs,
+                        selectionApp,
+                        selectionAppArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+
+            case COMMENT:
+                retCursor = db.query(
+                        FlickrContract.PhotoListEntry.TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder
+                );
+                break;
+
+            case COMMENT_WITH_ID:
+                id = uri.getPathSegments().get(1);
+
+                String selectionComment = "_id?";
+                String[] selectionCommentArgs = new String[]{id};
+
+                retCursor = db.query(
+                        FlickrContract.PhotoListEntry.TABLE_NAME,
+                        projection,
+                        selectionComment,
+                        selectionCommentArgs,
                         null,
                         null,
                         sortOrder
@@ -131,14 +171,14 @@ public class FlickrContentProvider extends ContentProvider {
             case PERSON_WITH_ID:
                 id = uri.getPathSegments().get(1);
 
-                String mSelectionPerson = "_id?";
-                String[] mSelectionPersonArgs = new String[]{id};
+                String selectionPerson = "_id?";
+                String[] selectionPersonArgs = new String[]{id};
 
                 retCursor = db.query(
                         FlickrContract.PersonListEntry.TABLE_NAME,
                         projection,
-                        mSelectionPerson,
-                        mSelectionPersonArgs,
+                        selectionPerson,
+                        selectionPersonArgs,
                         null,
                         null,
                         sortOrder
@@ -146,8 +186,6 @@ public class FlickrContentProvider extends ContentProvider {
                 break;
 
             case GROUP:
-                id = uri.getPathSegments().get(1);
-
                 retCursor = db.query(
                         FlickrContract.GroupListEntry.TABLE_NAME,
                         projection,
@@ -162,14 +200,14 @@ public class FlickrContentProvider extends ContentProvider {
             case GROUP_WITH_ID:
                 id = uri.getPathSegments().get(1);
 
-                String mSelectionGroup = "_id?";
-                String[] mSelectionGroupArgs = new String[]{id};
+                String selectionGroup = "_id?";
+                String[] selectionGroupArgs = new String[]{id};
 
                 retCursor = db.query(
                         FlickrContract.GroupListEntry.TABLE_NAME,
                         projection,
-                        mSelectionGroup,
-                        mSelectionGroupArgs,
+                        selectionGroup,
+                        selectionGroupArgs,
                         null,
                         null,
                         sortOrder
@@ -180,7 +218,8 @@ public class FlickrContentProvider extends ContentProvider {
                 throw new UnsupportedOperationException("Unknown Uri: " + uri);
         }
 
-        retCursor.setNotificationUri(getContext().getContentResolver(), uri);
+        if (getContext() != null)
+            retCursor.setNotificationUri(getContext().getContentResolver(), uri);
 
         return retCursor;
     }
@@ -190,7 +229,7 @@ public class FlickrContentProvider extends ContentProvider {
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
         final SQLiteDatabase db = flickrDBHelper.getWritableDatabase();
 
-        Uri returnUri = null;
+        Uri returnUri;
         long id;
 
         switch (uriMatcher.match(uri)) {
@@ -198,6 +237,15 @@ public class FlickrContentProvider extends ContentProvider {
                 id = db.insert(FlickrContract.PhotoListEntry.TABLE_NAME, null, values);
                 if (id > 0) {
                     returnUri = ContentUris.withAppendedId(FlickrContract.PhotoListEntry.CONTENT_URI, id);
+                } else {
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                }
+                break;
+
+            case COMMENT:
+                id = db.insert(FlickrContract.PhotoListEntry.TABLE_NAME, null, values);
+                if (id > 0) {
+                    returnUri = ContentUris.withAppendedId(FlickrContract.CommentListEntry.CONTENT_URI, id);
                 } else {
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 }
@@ -225,7 +273,8 @@ public class FlickrContentProvider extends ContentProvider {
                 throw new UnsupportedOperationException("Unknown Uri: " + uri);
         }
 
-        getContext().getContentResolver().notifyChange(uri, null);
+        if (getContext() != null)
+            getContext().getContentResolver().notifyChange(uri, null);
 
         return returnUri;
     }
@@ -242,19 +291,36 @@ public class FlickrContentProvider extends ContentProvider {
                 try {
                     for (ContentValues value : values) {
                         long id = db.insert(FlickrContract.PhotoListEntry.TABLE_NAME, null, value);
-                        if (id != -1) {
-                            rowsPhotoInserted++;
-                        }
+                        if (id != -1) rowsPhotoInserted++;
                     }
                     db.setTransactionSuccessful();
                 } finally {
                     db.endTransaction();
                 }
 
-                if (rowsPhotoInserted > 0) {
-                    getContext().getContentResolver().notifyChange(uri, null);
-                }
+                if (rowsPhotoInserted > 0)
+                    if (getContext() != null)
+                        getContext().getContentResolver().notifyChange(uri, null);
                 return rowsPhotoInserted;
+
+            case COMMENT:
+                db.beginTransaction();
+                int rowsCommentInserted = 0;
+
+                try {
+                    for (ContentValues value : values) {
+                        long id = db.insert(FlickrContract.PhotoListEntry.TABLE_NAME, null, value);
+                        if (id != -1) rowsCommentInserted++;
+                    }
+                    db.setTransactionSuccessful();
+                } finally {
+                    db.endTransaction();
+                }
+
+                if (rowsCommentInserted > 0)
+                    if (getContext() != null)
+                        getContext().getContentResolver().notifyChange(uri, null);
+                return rowsCommentInserted;
 
             case PERSON:
                 db.beginTransaction();
@@ -263,19 +329,16 @@ public class FlickrContentProvider extends ContentProvider {
                 try {
                     for (ContentValues value : values) {
                         long id = db.insert(FlickrContract.PersonListEntry.TABLE_NAME, null, value);
-
-                        if (id != -1) {
-                            rowsPersonInserted++;
-                        }
+                        if (id != -1) rowsPersonInserted++;
                     }
                     db.setTransactionSuccessful();
                 } finally {
                     db.endTransaction();
                 }
 
-                if (rowsPersonInserted > 0) {
-                    getContext().getContentResolver().notifyChange(uri, null);
-                }
+                if (rowsPersonInserted > 0)
+                    if (getContext() != null)
+                        getContext().getContentResolver().notifyChange(uri, null);
                 return rowsPersonInserted;
 
             case GROUP:
@@ -285,19 +348,16 @@ public class FlickrContentProvider extends ContentProvider {
                 try {
                     for (ContentValues value : values) {
                         long id = db.insert(FlickrContract.GroupListEntry.TABLE_NAME, null, value);
-
-                        if (id != -1) {
-                            rowsGroupInserted++;
-                        }
+                        if (id != -1) rowsGroupInserted++;
                     }
                     db.setTransactionSuccessful();
                 } finally {
                     db.endTransaction();
                 }
 
-                if (rowsGroupInserted > 0) {
-                    getContext().getContentResolver().notifyChange(uri, null);
-                }
+                if (rowsGroupInserted > 0)
+                    if (getContext() != null)
+                        getContext().getContentResolver().notifyChange(uri, null);
                 return rowsGroupInserted;
 
             default:
@@ -318,10 +378,23 @@ public class FlickrContentProvider extends ContentProvider {
                         selectionArgs
                 );
 
-                if (rowsPhotoDeleted > 0) {
-                    getContext().getContentResolver().notifyChange(uri, null);
-                }
+                if (rowsPhotoDeleted > 0)
+                    if (getContext() != null)
+                        getContext().getContentResolver().notifyChange(uri, null);
                 return rowsPhotoDeleted;
+
+            case COMMENT:
+                // directory
+                int rowsCommentDeleted = db.delete(
+                        FlickrContract.PhotoListEntry.TABLE_NAME,
+                        selection,
+                        selectionArgs
+                );
+
+                if (rowsCommentDeleted > 0)
+                    if (getContext() != null)
+                        getContext().getContentResolver().notifyChange(uri, null);
+                return rowsCommentDeleted;
 
             case PERSON:
                 // directory
@@ -331,9 +404,9 @@ public class FlickrContentProvider extends ContentProvider {
                         selectionArgs
                 );
 
-                if (rowsPersonDeleted > 0) {
-                    getContext().getContentResolver().notifyChange(uri, null);
-                }
+                if (rowsPersonDeleted > 0)
+                    if (getContext() != null)
+                        getContext().getContentResolver().notifyChange(uri, null);
                 return rowsPersonDeleted;
 
             case GROUP:
@@ -344,9 +417,9 @@ public class FlickrContentProvider extends ContentProvider {
                         selectionArgs
                 );
 
-                if (rowsGroupDeleted > 0) {
-                    getContext().getContentResolver().notifyChange(uri, null);
-                }
+                if (rowsGroupDeleted > 0)
+                    if (getContext() != null)
+                        getContext().getContentResolver().notifyChange(uri, null);
                 return rowsGroupDeleted;
 
             default:
