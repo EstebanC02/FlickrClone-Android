@@ -1,4 +1,4 @@
-package com.estebanmoncaleano.flickrclone.utilties;
+package com.estebanmoncaleano.flickrclone.utilties.web;
 
 import android.util.Log;
 

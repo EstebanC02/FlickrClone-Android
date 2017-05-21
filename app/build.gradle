@@ -9,7 +9,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 25
         versionCode buildDateTime
-        versionName "1.0." + buildDateTime
+        versionName "1.0.0." + buildDateTime
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

@@ -6,7 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.estebanmoncaleano.flickrclone.utilties.FontHelper;
+import com.estebanmoncaleano.flickrclone.utilties.view.FontHelper;
 import com.facebook.accountkit.AccessToken;
 import com.facebook.accountkit.AccountKit;
 import com.facebook.accountkit.AccountKitLoginResult;

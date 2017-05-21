@@ -1,4 +1,4 @@
-package com.estebanmoncaleano.flickrclone.utilties;
+package com.estebanmoncaleano.flickrclone.utilties.view;
 
 import android.graphics.Typeface;
 import android.view.View;
