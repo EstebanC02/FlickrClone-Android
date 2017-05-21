@@ -32,8 +32,13 @@ public class NetworkUtils {
     private final static String PARAM_NO_JSON_CALLBACK_KEY = "nojsoncallback";
     private final static String PARAM_NO_JSON_CALLBACK = "1";
 
-    public static URL buildURLPhotoSource(String farm, String server_id, String photo_id, String secret){
-        Uri builtUri = Uri.parse(FLICKR_PHOTO_SOURCE_FARM_URL + farm + FLICKR_PHOTO_SOURCE_STATIC_FLICKR_URL).buildUpon()
+    public static URL buildURLPhotoSource(String farm, String server_id, String photo_id,
+                                          String secret) {
+        Uri builtUri = Uri.parse(
+                FLICKR_PHOTO_SOURCE_FARM_URL
+                        + farm
+                        + FLICKR_PHOTO_SOURCE_STATIC_FLICKR_URL)
+                .buildUpon()
                 .appendPath(server_id)
                 .appendPath(photo_id + "_" + secret)
                 .build();
@@ -45,8 +50,13 @@ public class NetworkUtils {
         }
     }
 
-    public static URL buildURLPhotoSource(String farm, String server_id, String photo_id, String secret, String size){
-        Uri builtUri = Uri.parse(FLICKR_PHOTO_SOURCE_FARM_URL + farm + FLICKR_PHOTO_SOURCE_STATIC_FLICKR_URL).buildUpon()
+    public static URL buildURLPhotoSource(String farm, String server_id, String photo_id,
+                                          String secret, String size) {
+        Uri builtUri = Uri.parse(
+                FLICKR_PHOTO_SOURCE_FARM_URL
+                        + farm
+                        + FLICKR_PHOTO_SOURCE_STATIC_FLICKR_URL)
+                .buildUpon()
                 .appendPath(server_id)
                 .appendPath(photo_id + "_" + secret + "_" + size)
                 .build();
@@ -59,6 +69,7 @@ public class NetworkUtils {
     }
 
     private final static String PARAM_METHOD_GETRECENT = "flickr.photos.getRecent";
+
     public static URL buildUrlGetRecent() {
         Uri builtUri = Uri.parse(FLICKR_BASE_URL).buildUpon()
                 .appendQueryParameter(PARAM_METHOD_KEY, PARAM_METHOD_GETRECENT)
@@ -76,6 +87,7 @@ public class NetworkUtils {
 
     private final static String PARAM_TAGS = "tags";
     private final static String PARAM_METHOD_SEARCH = "flickr.photos.search";
+
     public static URL buildUrlSearch(String valueSearch) {
         Uri builtUri = Uri.parse(FLICKR_BASE_URL).buildUpon()
                 .appendQueryParameter(PARAM_METHOD_KEY, PARAM_METHOD_SEARCH)
@@ -94,7 +106,8 @@ public class NetworkUtils {
 
     private final static String PARAM_USERNAME = "username";
     private final static String PARAM_METHOD_FINDBYUSERNAME = "flickr.people.findByUsername";
-    public static URL buildUrlFindByUsername(String usernameSearch) {
+
+    public static URL buildUrlPeopleFindByUsername(String usernameSearch) {
         Uri builtUri = Uri.parse(FLICKR_BASE_URL).buildUpon()
                 .appendQueryParameter(PARAM_METHOD_KEY, PARAM_METHOD_FINDBYUSERNAME)
                 .appendQueryParameter(PARAM_FLICKR_API_KEY, FLICKR_API_KEY)
@@ -112,7 +125,8 @@ public class NetworkUtils {
 
     private final static String PARAM_USER_ID = "user_id";
     private final static String PARAM_METHOD_GETINFO = "flickr.people.getInfo";
-    public static URL buildUrlGetInfo(String userIdSearch) {
+
+    public static URL buildUrlPeopleGetInfo(String userIdSearch) {
         Uri builtUri = Uri.parse(FLICKR_BASE_URL).buildUpon()
                 .appendQueryParameter(PARAM_METHOD_KEY, PARAM_METHOD_GETINFO)
                 .appendQueryParameter(PARAM_FLICKR_API_KEY, FLICKR_API_KEY)
@@ -129,7 +143,8 @@ public class NetworkUtils {
     }
 
     private final static String PARAM_METHOD_GETPHOTOS = "flickr.people.getPhotos";
-    public static URL buildUrlGetPhotos(String userIdSearch) {
+
+    public static URL buildUrlPeopleGetPhotos(String userIdSearch) {
         Uri builtUri = Uri.parse(FLICKR_BASE_URL).buildUpon()
                 .appendQueryParameter(PARAM_METHOD_KEY, PARAM_METHOD_GETPHOTOS)
                 .appendQueryParameter(PARAM_FLICKR_API_KEY, FLICKR_API_KEY)
@@ -146,6 +161,7 @@ public class NetworkUtils {
     }
 
     private final static String PARAM_METHOD_PHOTO_GET_INFO = "flickr.photos.getInfo";
+
     public static URL buildUrlPhotoGetInfo(String photoIdSearch) {
         Uri builtUri = Uri.parse(FLICKR_BASE_URL).buildUpon()
                 .appendQueryParameter(PARAM_METHOD_KEY, PARAM_METHOD_PHOTO_GET_INFO)
@@ -163,6 +179,7 @@ public class NetworkUtils {
     }
 
     private final static String PARAM_METHOD_PHOTO_GET_COMMENTS = "flickr.photos.comments.getList";
+
     public static URL buildUrlPhotoGetComments(String photoIdSearch) {
         Uri builtUri = Uri.parse(FLICKR_BASE_URL).buildUpon()
                 .appendQueryParameter(PARAM_METHOD_KEY, PARAM_METHOD_PHOTO_GET_COMMENTS)
@@ -180,6 +197,7 @@ public class NetworkUtils {
     }
 
     private final static String PARAM_METHOD_GROUPS_SEARCH = "flickr.groups.search";
+
     public static URL buildUrlGroupSearch(String textSearch) {
         Uri builtUri = Uri.parse(FLICKR_BASE_URL).buildUpon()
                 .appendQueryParameter(PARAM_METHOD_KEY, PARAM_METHOD_GROUPS_SEARCH)
@@ -197,6 +215,7 @@ public class NetworkUtils {
     }
 
     private final static String PARAM_METHOD_GROUPS_GETINFO = "flickr.groups.getInfo";
+
     public static URL buildUrlGroupGetInfo(String groupIdSearch) {
         Uri builtUri = Uri.parse(FLICKR_BASE_URL).buildUpon()
                 .appendQueryParameter(PARAM_METHOD_KEY, PARAM_METHOD_GROUPS_GETINFO)

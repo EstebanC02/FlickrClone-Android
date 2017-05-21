@@ -59,7 +59,8 @@ public class FlickrJsonUtils {
         return photoList;
     }
 
-    public static Photo getPhotoInfoFromJson(String photoInfoJsonStr) {
+    public static Photo getPhotoInfoFromJson(String photoInfoJsonStr)
+            throws JSONException {
         if (errorInJson(photoInfoJsonStr)) return null;
 
         final String OWM_PHOTO = "photo";
@@ -70,26 +71,21 @@ public class FlickrJsonUtils {
         final String OWM_TAKEN = "taken";
 
         Photo photo = new Photo();
-        try {
-            JSONObject photoJson = new JSONObject(photoInfoJsonStr);
-            JSONObject photoJsonInfo = photoJson.getJSONObject(OWM_PHOTO);
-            photo.setId(photoJsonInfo.getInt(OWM_ID));
+        JSONObject photoJson = new JSONObject(photoInfoJsonStr);
+        JSONObject photoJsonInfo = photoJson.getJSONObject(OWM_PHOTO);
+        photo.setId(photoJsonInfo.getInt(OWM_ID));
 
-            JSONObject phoJsonDescription = photoJsonInfo.getJSONObject(OWM_DESCRIPTION);
-            photo.setDescription(phoJsonDescription.getString(OWM_CONTENT));
+        JSONObject phoJsonDescription = photoJsonInfo.getJSONObject(OWM_DESCRIPTION);
+        photo.setDescription(phoJsonDescription.getString(OWM_CONTENT));
 
-            JSONObject phoJsonDates = photoJsonInfo.getJSONObject(OWM_DATES);
-            photo.setDate(phoJsonDates.getString(OWM_TAKEN));
-        } catch (JSONException e) {
-            Log.e(TAG, e.getMessage());
-            return null;
-        }
+        JSONObject phoJsonDates = photoJsonInfo.getJSONObject(OWM_DATES);
+        photo.setDate(phoJsonDates.getString(OWM_TAKEN));
         return photo;
     }
 
-    public static ArrayList<Comment> getCommentsFromJson(String photoInfoJsonStr)
+    public static ArrayList<Comment> getCommentsFromJson(String commentsInfoJsonStr)
             throws JSONException {
-        if (errorInJson(photoInfoJsonStr)) return null;
+        if (errorInJson(commentsInfoJsonStr)) return null;
 
         final String OWM_COMMENTS = "comments";
         final String OWM_COMMENT = "comment";
@@ -102,7 +98,7 @@ public class FlickrJsonUtils {
         JSONArray jsonArray;
         int photoId;
         try {
-            JSONObject commentJson = new JSONObject(photoInfoJsonStr);
+            JSONObject commentJson = new JSONObject(commentsInfoJsonStr);
             JSONObject commentJsonInfo = commentJson.getJSONObject(OWM_COMMENTS);
             photoId = commentJsonInfo.getInt(OWM_PHOTO_ID);
             jsonArray = commentJsonInfo.getJSONArray(OWM_COMMENT);

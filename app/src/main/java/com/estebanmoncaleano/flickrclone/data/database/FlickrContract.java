@@ -48,6 +48,7 @@ public class FlickrContract {
 
         public static final String TABLE_NAME = "PersonList";
 
+        public static final String _ID = "id";
         public static final String USERNAME = "username";
         public static final String REALNAME = "realname";
         public static final String LOCATION = "location";
@@ -62,6 +63,7 @@ public class FlickrContract {
 
         public static final String TABLE_NAME = "GroupList";
 
+        public static final String _ID = "id";
         public static final String NAME = "name";
         public static final String DESCRIPTION = "description";
         public static final String RULES = "rules";
