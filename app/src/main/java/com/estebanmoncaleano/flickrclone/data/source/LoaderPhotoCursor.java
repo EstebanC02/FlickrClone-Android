@@ -7,6 +7,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 
 import com.estebanmoncaleano.flickrclone.PhotoSearchActivity;
+import com.estebanmoncaleano.flickrclone.data.adapter.PhotoCursorAdapter;
 import com.estebanmoncaleano.flickrclone.sync.AsyncLoaderPhoto;
 
 public class LoaderPhotoCursor implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -15,9 +16,11 @@ public class LoaderPhotoCursor implements LoaderManager.LoaderCallbacks<Cursor> 
     public static final int TASK_CURSOR_SEARCH_PHOTO = 11;
 
     private Context context;
+    private PhotoCursorAdapter photoCursorAdapter;
 
-    public LoaderPhotoCursor(Context context) {
+    public LoaderPhotoCursor(Context context, PhotoCursorAdapter adapter) {
         this.context = context;
+        this.photoCursorAdapter = adapter;
     }
 
     @Override
@@ -42,7 +45,7 @@ public class LoaderPhotoCursor implements LoaderManager.LoaderCallbacks<Cursor> 
                 break;
 
             case TASK_CURSOR_SEARCH_PHOTO:
-                PhotoSearchActivity.setPhotoCursorAdapter(cursor);
+                photoCursorAdapter.setPhotoCursorData(cursor);
                 break;
         }
     }
@@ -54,7 +57,7 @@ public class LoaderPhotoCursor implements LoaderManager.LoaderCallbacks<Cursor> 
                 break;
 
             case TASK_CURSOR_SEARCH_PHOTO:
-                PhotoSearchActivity.setPhotoCursorAdapter(null);
+                photoCursorAdapter.setPhotoCursorData(null);
                 break;
         }
     }
