@@ -51,6 +51,20 @@
             android:authorities="com.estebanmoncaleano.flickrclone"
             android:exported="false" />
 
+        <service
+            android:name=".data.database.service.PhotoUpdateService"
+            android:exported="false" />
+        <service
+            android:name=".data.database.service.CommentUpdateService"
+            android:exported="false" />
+
+        <service
+            android:name=".data.database.service.GroupUpdateService"
+            android:exported="false" />
+
+        <service
+            android:name=".data.database.service.PeopleUpdateService"
+            android:exported="false" />
     </application>
 
 </manifest>
