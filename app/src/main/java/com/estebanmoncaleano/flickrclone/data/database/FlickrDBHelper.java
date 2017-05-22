@@ -22,6 +22,9 @@ public class FlickrDBHelper extends SQLiteOpenHelper {
                 FlickrContract.PhotoListEntry.SECRET + " TEXT NOT NULL, " +
                 FlickrContract.PhotoListEntry.SERVER + " INTEGER NOT NULL, " +
                 FlickrContract.PhotoListEntry.FARM + " INTEGER NOT NULL, " +
+                FlickrContract.PhotoListEntry.USERNAME + " TEXT NOT NULL, " +
+                FlickrContract.PhotoListEntry.REALNAME + " TEXT, " +
+                FlickrContract.PhotoListEntry.LOCATION + " TEXT, " +
                 FlickrContract.PhotoListEntry.TITLE + " TEXT NOT NULL, " +
                 FlickrContract.PhotoListEntry.DESCRIPTION + " TEXT, " +
                 FlickrContract.PhotoListEntry.DATE + " TEXT);";

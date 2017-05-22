@@ -26,6 +26,9 @@ public class FlickrContract {
         public static final String TITLE = "title";
         public static final String DESCRIPTION = "description";
         public static final String DATE = "date";
+        public static final String USERNAME = "username";
+        public static final String REALNAME = "realname";
+        public static final String LOCATION = "location";
     }
 
     public static final class CommentListEntry implements BaseColumns {

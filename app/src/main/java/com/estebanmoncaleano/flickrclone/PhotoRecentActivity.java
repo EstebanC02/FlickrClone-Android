@@ -1,5 +1,6 @@
 package com.estebanmoncaleano.flickrclone;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -7,12 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.estebanmoncaleano.flickrclone.data.adapter.PhotoCursorAdapter;
 import com.estebanmoncaleano.flickrclone.data.adapter.PhotoListAdapter;
+import com.estebanmoncaleano.flickrclone.data.database.FlickrContract;
 import com.estebanmoncaleano.flickrclone.data.model.Photo;
 import com.estebanmoncaleano.flickrclone.data.source.LoaderPhotoService;
 import com.estebanmoncaleano.flickrclone.utilties.web.NetworkUtils;
@@ -85,6 +85,8 @@ public class PhotoRecentActivity extends AppCompatActivity implements
 
     @Override
     public void onListItemClick(long clickedItemIndex) {
-
+        Intent intent = new Intent(this, PhotoInfoActivity.class);
+        intent.putExtra(FlickrContract.PhotoListEntry._ID, clickedItemIndex);
+        startActivity(intent);
     }
 }

@@ -52,6 +52,9 @@ public class FlickrJsonUtils {
                     photoRecentList.getInt(OWM_FARM),
                     photoRecentList.getString(OWM_TITLE),
                     null,
+                    null,
+                    null,
+                    null,
                     null
             );
             photoList.add(photoInfo);
@@ -65,21 +68,42 @@ public class FlickrJsonUtils {
 
         final String OWM_PHOTO = "photo";
         final String OWM_ID = "id";
+        final String OWM_OWNER = "owner";
+        final String OWM_USERNAME = "username";
+        final String OWM_REALNAME = "realname";
+        final String OWM_LOCATION = "location";
         final String OWM_DESCRIPTION = "description";
         final String OWM_CONTENT = "_content";
         final String OWM_DATES = "dates";
         final String OWM_TAKEN = "taken";
+        final String OWM_SECRET = "secret";
+        final String OWM_SERVER = "server";
+        final String OWM_FARM = "farm";
+        final String OWM_TITLE = "title";
 
         Photo photo = new Photo();
         JSONObject photoJson = new JSONObject(photoInfoJsonStr);
         JSONObject photoJsonInfo = photoJson.getJSONObject(OWM_PHOTO);
-        photo.setId(photoJsonInfo.getInt(OWM_ID));
+        photo.setId(photoJsonInfo.getLong(OWM_ID));
+        photo.setServer(photoJsonInfo.getInt(OWM_SERVER));
+        photo.setSecret(photoJsonInfo.getString(OWM_SECRET));
+        photo.setFarm(photoJsonInfo.getInt(OWM_FARM));
 
-        JSONObject phoJsonDescription = photoJsonInfo.getJSONObject(OWM_DESCRIPTION);
-        photo.setDescription(phoJsonDescription.getString(OWM_CONTENT));
+        JSONObject photoJsonOwner = photoJsonInfo.getJSONObject(OWM_OWNER);
+        photo.setUsername(photoJsonOwner.getString(OWM_USERNAME));
+        photo.setRealname(photoJsonOwner.getString(OWM_REALNAME));
+        photo.setLocation(photoJsonOwner.getString(OWM_LOCATION));
 
-        JSONObject phoJsonDates = photoJsonInfo.getJSONObject(OWM_DATES);
-        photo.setDate(phoJsonDates.getString(OWM_TAKEN));
+        JSONObject photoJsonTitle = photoJsonInfo.getJSONObject(OWM_TITLE);
+        photo.setTitle(photoJsonTitle.getString(OWM_CONTENT));
+
+        JSONObject photoJsonDescription = photoJsonInfo.getJSONObject(OWM_DESCRIPTION);
+        photo.setDescription(photoJsonDescription.getString(OWM_CONTENT));
+
+        JSONObject photoJsonDates = photoJsonInfo.getJSONObject(OWM_DATES);
+        photo.setDate(photoJsonDates.getString(OWM_TAKEN));
+
+        Log.i(FlickrJsonUtils.class.getSimpleName(), "photo: " + photo.getId());
         return photo;
     }
 
@@ -155,6 +179,9 @@ public class FlickrJsonUtils {
                     photoRecentList.getInt(OWM_SERVER),
                     photoRecentList.getInt(OWM_FARM),
                     photoRecentList.getString(OWM_TITLE),
+                    null,
+                    null,
+                    null,
                     null,
                     null
             );
@@ -255,6 +282,9 @@ public class FlickrJsonUtils {
                     photoRecentList.getInt(OWM_SERVER),
                     photoRecentList.getInt(OWM_FARM),
                     photoRecentList.getString(OWM_TITLE),
+                    null,
+                    null,
+                    null,
                     null,
                     null
             );

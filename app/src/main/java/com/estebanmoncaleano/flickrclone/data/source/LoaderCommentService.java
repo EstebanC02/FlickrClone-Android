@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 
+import com.estebanmoncaleano.flickrclone.data.adapter.CommentsListAdapter;
 import com.estebanmoncaleano.flickrclone.data.database.FlickrContract;
 import com.estebanmoncaleano.flickrclone.data.database.service.CommentUpdateService;
 import com.estebanmoncaleano.flickrclone.data.model.Comment;
@@ -17,10 +18,12 @@ public class LoaderCommentService implements LoaderManager.LoaderCallbacks<Array
 
     public static final int TASK_COMMENT_LIST = 41;
 
+    private CommentsListAdapter commentsListAdapter;
     private Context context;
 
-    public LoaderCommentService(Context context) {
+    public LoaderCommentService(Context context, CommentsListAdapter adapter) {
         this.context = context;
+        this.commentsListAdapter = adapter;
     }
 
     @Override
@@ -40,7 +43,6 @@ public class LoaderCommentService implements LoaderManager.LoaderCallbacks<Array
         switch (loader.getId()) {
             case TASK_COMMENT_LIST: {
                 if (comments != null) {
-                    ContentValues[] commentValues = new ContentValues[comments.size()];
                     for (int i = 0; i < comments.size(); i++) {
                         Comment comment = comments.get(i);
                         ContentValues value = new ContentValues();
@@ -49,9 +51,9 @@ public class LoaderCommentService implements LoaderManager.LoaderCallbacks<Array
                         value.put(FlickrContract.CommentListEntry.AUTHOR, comment.getAuthor());
                         value.put(FlickrContract.CommentListEntry.AUTHOR_NAME, comment.getAuthor_name());
                         value.put(FlickrContract.CommentListEntry.MESSAGE, comment.getMessage());
-                        commentValues[i] = value;
+                        CommentUpdateService.insertNewTask(context, value);
                     }
-                    CommentUpdateService.bulkInsertNewTask(context, commentValues);
+                    commentsListAdapter.setCommentListData(comments);
                 }
                 break;
             }
@@ -62,6 +64,7 @@ public class LoaderCommentService implements LoaderManager.LoaderCallbacks<Array
     public void onLoaderReset(Loader<ArrayList<Comment>> loader) {
         switch (loader.getId()) {
             case TASK_COMMENT_LIST:
+                commentsListAdapter.setCommentListData(null);
                 break;
         }
     }

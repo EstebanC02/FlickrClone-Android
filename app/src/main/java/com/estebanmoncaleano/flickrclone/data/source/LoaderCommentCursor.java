@@ -6,16 +6,19 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 
+import com.estebanmoncaleano.flickrclone.data.adapter.CommentsCursorAdapter;
 import com.estebanmoncaleano.flickrclone.sync.AsyncLoaderComment;
 
 public class LoaderCommentCursor implements LoaderManager.LoaderCallbacks<Cursor> {
 
     public static final int TASK_COMMENT_CURSOR = 40;
 
+    private CommentsCursorAdapter commentsCursorAdapter;
     private Context context;
 
-    public LoaderCommentCursor(Context context) {
+    public LoaderCommentCursor(Context context, CommentsCursorAdapter adapter) {
         this.context = context;
+        this.commentsCursorAdapter = adapter;
     }
 
     @Override
@@ -34,6 +37,7 @@ public class LoaderCommentCursor implements LoaderManager.LoaderCallbacks<Cursor
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         switch (loader.getId()) {
             case TASK_COMMENT_CURSOR:
+                commentsCursorAdapter.setCommentsCursorData(cursor);
                 break;
         }
     }
@@ -42,6 +46,7 @@ public class LoaderCommentCursor implements LoaderManager.LoaderCallbacks<Cursor
     public void onLoaderReset(Loader<Cursor> loader) {
         switch (loader.getId()) {
             case TASK_COMMENT_CURSOR:
+                commentsCursorAdapter.setCommentsCursorData(null);
                 break;
         }
     }

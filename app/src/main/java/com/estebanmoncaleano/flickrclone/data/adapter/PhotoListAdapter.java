@@ -2,6 +2,7 @@ package com.estebanmoncaleano.flickrclone.data.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import com.estebanmoncaleano.flickrclone.PhotoInfoActivity;
 import com.estebanmoncaleano.flickrclone.R;
 import com.estebanmoncaleano.flickrclone.data.model.Photo;
 import com.estebanmoncaleano.flickrclone.utilties.web.NetworkUtils;

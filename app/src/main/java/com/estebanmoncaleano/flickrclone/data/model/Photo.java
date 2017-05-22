@@ -9,12 +9,15 @@ public class Photo {
     private String title;
     private String description;
     private String date;
+    private String username;
+    private String realname;
+    private String location;
 
     public Photo() {
     }
 
     public Photo(long id, String owner, String secret, int server, int farm, String title,
-                 String description, String date) {
+                 String description, String date, String username, String realname, String location) {
         this.id = id;
         this.owner = owner;
         this.secret = secret;
@@ -23,6 +26,9 @@ public class Photo {
         this.title = title;
         this.description = description;
         this.date = date;
+        this.username = username;
+        this.realname = realname;
+        this.location = location;
     }
 
     public long getId() {
@@ -87,5 +93,33 @@ public class Photo {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getRealname() {
+        return realname;
+    }
+
+    public void setRealname(String realname) {
+        this.realname = realname;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

@@ -89,7 +89,9 @@ public class PhotoSearchActivity extends AppCompatActivity implements
 
     @Override
     public void onListItemClick(long clickedItemIndex) {
-
+        Intent intent = new Intent(this, PhotoInfoActivity.class);
+        intent.putExtra(FlickrContract.PhotoListEntry._ID, clickedItemIndex);
+        startActivity(intent);
     }
 
     @Override

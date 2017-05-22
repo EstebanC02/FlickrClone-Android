@@ -5,9 +5,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.util.Base64;
-import android.util.Log;
-
-import com.estebanmoncaleano.flickrclone.PhotoSearchActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -174,13 +171,14 @@ public class NetworkUtils {
         }
     }
 
+    private final static String PARAM_PHOTO_ID = "photo_id";
     private final static String PARAM_METHOD_PHOTO_GET_INFO = "flickr.photos.getInfo";
 
     public static URL buildUrlPhotoGetInfo(String photoIdSearch) {
         Uri builtUri = Uri.parse(FLICKR_BASE_URL).buildUpon()
                 .appendQueryParameter(PARAM_METHOD_KEY, PARAM_METHOD_PHOTO_GET_INFO)
                 .appendQueryParameter(PARAM_FLICKR_API_KEY, FLICKR_API_KEY)
-                .appendQueryParameter(PARAM_USER_ID, photoIdSearch)
+                .appendQueryParameter(PARAM_PHOTO_ID, photoIdSearch)
                 .appendQueryParameter(PARAM_FORMAT, PARAM_JSON)
                 .appendQueryParameter(PARAM_NO_JSON_CALLBACK_KEY, PARAM_NO_JSON_CALLBACK)
                 .build();

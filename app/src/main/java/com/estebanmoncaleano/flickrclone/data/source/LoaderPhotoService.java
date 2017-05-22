@@ -50,7 +50,6 @@ public class LoaderPhotoService implements LoaderManager.LoaderCallbacks<ArrayLi
             case TASK_LIST_RECENT_PHOTO:
                 if (photos != null)
                     photoListAdapter.setPhotoListData(photos);
-                Log.i(LoaderPhotoService.class.getName(), "Size photos: " + photoListAdapter.getItemCount());
                 break;
 
             case TASK_SEARCH_PHOTO: {

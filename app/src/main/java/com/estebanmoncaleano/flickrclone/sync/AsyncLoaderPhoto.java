@@ -129,7 +129,6 @@ public class AsyncLoaderPhoto {
             @Override
             protected void onStartLoading() {
                 valuePage = args.getInt(NetworkUtils.PAGE_VALUE_KEY);
-                Log.i(TAG, "valuePage: " + valuePage);
                 if (cursorPhotoRecentList != null)
                     deliverResult(cursorPhotoRecentList);
                 else
@@ -169,13 +168,13 @@ public class AsyncLoaderPhoto {
         return new AsyncTaskLoader<Photo>(context) {
 
             Photo photo;
-            int idPhoto;
+            long idPhoto;
 
             @Override
             protected void onStartLoading() {
                 if (args == null) return;
 
-                int idArgs = args.getInt(FlickrContract.PhotoListEntry._ID);
+                long idArgs = args.getLong(FlickrContract.PhotoListEntry._ID);
 
                 if (idPhoto == idArgs && photo != null) {
                     deliverResult(photo);
