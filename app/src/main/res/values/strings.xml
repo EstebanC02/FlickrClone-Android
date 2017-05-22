@@ -15,6 +15,7 @@
     <string name="button_show_recent">Show me recent photos</string>
     <string name="spinner_message_error">Please selected a item from de spinner</string>
     <string name="edit_text_message_error">Please insert a valid value</string>
+    <string name="not_implemented">Not already implemented</string>
 
     <!-- PhotoSearchActivity -->
     <string name="message_internet_disable">Image not available. You can click here to see more information if it is available</string>

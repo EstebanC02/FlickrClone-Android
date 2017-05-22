@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">FlickrClone</string>
+    <string name="flick">flick</string>
+    <string name="r">r</string>
+    <string name="flick_logo">Encuentra tu inspiración…</string>
+
+    <!-- LoginActivity -->
+    <string name="phone_login_button">Ingreso con tu celular</string>
+    <string name="email_login_button">Ingreso con tu email</string>
+    <string name="later_login">DESPUÉS!</string>
+
+    <!-- MainActivity -->
+    <string name="button_search">Buscar</string>
+    <string name="hint_input_text">Fotos, personas, o grupos</string>
+    <string name="button_show_recent">Muestrame fotos recientes</string>
+    <string name="spinner_message_error">Por favor selecciona un grupo</string>
+    <string name="edit_text_message_error">Por favor ingrese un valor valido</string>
+    <string name="not_implemented">Disponible en la siguiente versión</string>
+
+    <!-- PhotoSearchActivity -->
+    <string name="message_internet_disable">Imagen no disponbiel. Puedes dar click para ver más información, si esta está disponible</string>
+    <string name="message_not_info_available">Lo siento, No hay información disponible</string>
+
+    <!-- PhotoRecentActivity -->
+    <string name="action_bar_title_recent">Reciente</string>
+
+    <!-- PhotoInfoActivity -->
+    <string name="comments">Comentarios…</string>
+    <string name="no_tittle">Sin titulo</string>
+    <string name="no_username">Sin usuario asociado</string>
+    <string name="no_realname">Sin nombre asociado</string>
+    <string name="no_description">Sin descripcion</string>
+    <string name="no_date">Sin fecha</string>
+    <string name="no_location">Sin ubicación</string>
+</resources>

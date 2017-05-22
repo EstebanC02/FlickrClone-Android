@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void launchSearchPeople(String searchPeople) {
+        showMessage(getString(R.string.not_implemented));
         /*
         Intent intent = new Intent(this, PeopleSearchActivity.class);
         intent.setData(Uri.withAppendedPath(FlickrContract.PeopleListEntry.CONTENT_URI, searchPeople));
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void launchSearchGroup(String searchGroup) {
+        showMessage(getString(R.string.not_implemented));
         /*
         Intent intent = new Intent(this, GroupSearchActivity.class);
         intent.setData(Uri.withAppendedPath(FlickrContract.GroupListEntry.CONTENT_URI, searchGroup));

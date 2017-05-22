@@ -103,7 +103,6 @@ public class FlickrJsonUtils {
         JSONObject photoJsonDates = photoJsonInfo.getJSONObject(OWM_DATES);
         photo.setDate(photoJsonDates.getString(OWM_TAKEN));
 
-        Log.i(FlickrJsonUtils.class.getSimpleName(), "photo: " + photo.getId());
         return photo;
     }
 

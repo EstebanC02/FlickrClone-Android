@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="search_type_array">
+        <item>Fotos, personas, o grupos</item>
+        <item>Fotos</item>
+        <item>Personas</item>
+        <item>Grupos</item>
+    </string-array>
+</resources>
