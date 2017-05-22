@@ -149,7 +149,7 @@ public class FlickrJsonUtils {
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject photoRecentList = jsonArray.getJSONObject(i);
             Photo photoInfo = new Photo(
-                    photoRecentList.getInt(OWM_ID),
+                    photoRecentList.getLong(OWM_ID),
                     photoRecentList.getString(OWM_OWNER),
                     photoRecentList.getString(OWM_SECRET),
                     photoRecentList.getInt(OWM_SERVER),

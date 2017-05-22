@@ -1,7 +1,7 @@
 package com.estebanmoncaleano.flickrclone.data.model;
 
 public class Photo {
-    private int id;
+    private long id;
     private String owner;
     private String secret;
     private int server;
@@ -13,7 +13,8 @@ public class Photo {
     public Photo() {
     }
 
-    public Photo(int id, String owner, String secret, int server, int farm, String title, String description, String date) {
+    public Photo(long id, String owner, String secret, int server, int farm, String title,
+                 String description, String date) {
         this.id = id;
         this.owner = owner;
         this.secret = secret;
@@ -24,7 +25,7 @@ public class Photo {
         this.date = date;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

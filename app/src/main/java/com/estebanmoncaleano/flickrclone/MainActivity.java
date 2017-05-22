@@ -1,5 +1,7 @@
 package com.estebanmoncaleano.flickrclone;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.estebanmoncaleano.flickrclone.data.database.FlickrContract;
 import com.estebanmoncaleano.flickrclone.utilties.view.FontHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,12 +52,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void launchSearchPhoto(String searchPhoto) {
+        Intent intent = new Intent(this, PhotoSearchActivity.class);
+        intent.putExtra(FlickrContract.PhotoListEntry.TITLE, searchPhoto);
+        startActivity(intent);
     }
 
     private void launchSearchPeople(String searchPeople) {
+        /*
+        Intent intent = new Intent(this, PeopleSearchActivity.class);
+        intent.setData(Uri.withAppendedPath(FlickrContract.PeopleListEntry.CONTENT_URI, searchPeople));
+        startActivity(intent);
+         */
     }
 
     private void launchSearchGroup(String searchGroup) {
+        /*
+        Intent intent = new Intent(this, GroupSearchActivity.class);
+        intent.setData(Uri.withAppendedPath(FlickrContract.GroupListEntry.CONTENT_URI, searchGroup));
+        startActivity(intent);
+         */
     }
 
     private void showMessage(String message) {

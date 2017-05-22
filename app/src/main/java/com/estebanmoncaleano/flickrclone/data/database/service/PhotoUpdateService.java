@@ -16,7 +16,6 @@ public class PhotoUpdateService extends IntentService {
     private static final String TAG = PhotoUpdateService.class.getSimpleName();
     //Intent actions
     public static final String ACTION_INSERT = TAG + ".INSERT";
-    public static final String ACTION_BULK_INSERT = TAG + ".BULK_INSERT";
     public static final String ACTION_UPDATE = TAG + ".UPDATE";
     public static final String ACTION_DELETE = TAG + ".DELETE";
 
@@ -29,13 +28,6 @@ public class PhotoUpdateService extends IntentService {
     public static void insertNewTask(Context context, ContentValues values) {
         Intent intent = new Intent(context, PhotoUpdateService.class);
         intent.setAction(ACTION_INSERT);
-        intent.putExtra(EXTRA_VALUES, values);
-        context.startService(intent);
-    }
-
-    public static void bulkInsertNewTask(Context context, ContentValues[] values) {
-        Intent intent = new Intent(context, PhotoUpdateService.class);
-        intent.setAction(ACTION_BULK_INSERT);
         intent.putExtra(EXTRA_VALUES, values);
         context.startService(intent);
     }
@@ -60,9 +52,6 @@ public class PhotoUpdateService extends IntentService {
         assert intent != null;
         if (ACTION_INSERT.equals(intent.getAction())) {
             ContentValues values = intent.getParcelableExtra(EXTRA_VALUES);
-            performInsert(values);
-        } else if (ACTION_BULK_INSERT.equals(intent.getAction())) {
-            ContentValues[] values = (ContentValues[]) intent.getParcelableArrayExtra(EXTRA_VALUES);
             performInsert(values);
         } else if (ACTION_UPDATE.equals(intent.getAction())) {
             ContentValues values = intent.getParcelableExtra(EXTRA_VALUES);

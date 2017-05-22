@@ -229,7 +229,7 @@ public class FlickrContentProvider extends ContentProvider {
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
         final SQLiteDatabase db = flickrDBHelper.getWritableDatabase();
 
-        Uri returnUri;
+        Uri returnUri = null;
         long id;
 
         switch (uriMatcher.match(uri)) {
@@ -237,8 +237,6 @@ public class FlickrContentProvider extends ContentProvider {
                 id = db.insert(FlickrContract.PhotoListEntry.TABLE_NAME, null, values);
                 if (id > 0) {
                     returnUri = ContentUris.withAppendedId(FlickrContract.PhotoListEntry.CONTENT_URI, id);
-                } else {
-                    throw new android.database.SQLException("Failed to insert row into " + uri);
                 }
                 break;
 

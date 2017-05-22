@@ -2,7 +2,7 @@ package com.estebanmoncaleano.flickrclone.data.model;
 
 public class Comment {
     private int id;
-    private int photo_id;
+    private long photo_id;
     private String author;
     private String author_name;
     private String message;
@@ -10,7 +10,7 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(int id, int photo_id, String author, String author_name, String message) {
+    public Comment(int id, long photo_id, String author, String author_name, String message) {
         this.id = id;
         this.photo_id = photo_id;
         this.author = author;
@@ -26,11 +26,11 @@ public class Comment {
         this.id = id;
     }
 
-    public int getPhoto_id() {
+    public long getPhoto_id() {
         return photo_id;
     }
 
-    public void setPhoto_id(int photo_id) {
+    public void setPhoto_id(long photo_id) {
         this.photo_id = photo_id;
     }
 

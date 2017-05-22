@@ -5,6 +5,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.util.Base64;
+import android.util.Log;
+
+import com.estebanmoncaleano.flickrclone.PhotoSearchActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +17,9 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class NetworkUtils {
+
+    private static final String TAG = NetworkUtils.class.getSimpleName();
+
     static {
         System.loadLibrary("keys");
     }
@@ -40,7 +46,7 @@ public class NetworkUtils {
                         + FLICKR_PHOTO_SOURCE_STATIC_FLICKR_URL)
                 .buildUpon()
                 .appendPath(server_id)
-                .appendPath(photo_id + "_" + secret)
+                .appendPath(photo_id + "_" + secret + ".jpg")
                 .build();
 
         try {
@@ -58,7 +64,7 @@ public class NetworkUtils {
                         + FLICKR_PHOTO_SOURCE_STATIC_FLICKR_URL)
                 .buildUpon()
                 .appendPath(server_id)
-                .appendPath(photo_id + "_" + secret + "_" + size)
+                .appendPath(photo_id + "_" + secret + "_" + size + ".jpg")
                 .build();
 
         try {
@@ -86,13 +92,20 @@ public class NetworkUtils {
     }
 
     private final static String PARAM_TAGS = "tags";
+    private final static String PARAM_PER_PAGE = "per_page";
+    private final static String PARAM_PER_PAGE_VALUE = "10";
+    private final static String PARAM_PAGE = "page";
+    public static String PAGE_VALUE_KEY = "page";
     private final static String PARAM_METHOD_SEARCH = "flickr.photos.search";
 
-    public static URL buildUrlSearch(String valueSearch) {
+    public static URL buildUrlSearch(String valueSearch, int valuePage) {
+        Log.i(TAG, "Value page: " + String.valueOf(valuePage));
         Uri builtUri = Uri.parse(FLICKR_BASE_URL).buildUpon()
                 .appendQueryParameter(PARAM_METHOD_KEY, PARAM_METHOD_SEARCH)
                 .appendQueryParameter(PARAM_FLICKR_API_KEY, FLICKR_API_KEY)
                 .appendQueryParameter(PARAM_TAGS, valueSearch)
+                .appendQueryParameter(PARAM_PER_PAGE, PARAM_PER_PAGE_VALUE)
+                .appendQueryParameter(PARAM_PAGE, String.valueOf(valuePage))
                 .appendQueryParameter(PARAM_FORMAT, PARAM_JSON)
                 .appendQueryParameter(PARAM_NO_JSON_CALLBACK_KEY, PARAM_NO_JSON_CALLBACK)
                 .build();

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 
+import com.estebanmoncaleano.flickrclone.PhotoSearchActivity;
 import com.estebanmoncaleano.flickrclone.data.database.FlickrContract;
 import com.estebanmoncaleano.flickrclone.data.database.service.PhotoUpdateService;
 import com.estebanmoncaleano.flickrclone.data.model.Photo;
@@ -29,7 +30,7 @@ public class LoaderPhotoService implements LoaderManager.LoaderCallbacks<ArrayLi
         AsyncLoaderPhoto loaderPhoto = new AsyncLoaderPhoto();
         switch (id) {
             case TASK_LIST_RECENT_PHOTO:
-                return loaderPhoto.getPhotoRecentList(context, args);
+                return loaderPhoto.getPhotoRecentList(context);
 
             case TASK_SEARCH_PHOTO:
                 return loaderPhoto.getPhotoSearchList(context, args);
@@ -48,7 +49,6 @@ public class LoaderPhotoService implements LoaderManager.LoaderCallbacks<ArrayLi
 
             case TASK_SEARCH_PHOTO: {
                 if (photos != null) {
-                    ContentValues[] photoValues = new ContentValues[photos.size()];
                     for (int i = 0; i < photos.size(); i++) {
                         Photo photo = photos.get(i);
                         ContentValues value = new ContentValues();
@@ -58,9 +58,9 @@ public class LoaderPhotoService implements LoaderManager.LoaderCallbacks<ArrayLi
                         value.put(FlickrContract.PhotoListEntry.SERVER, photo.getServer());
                         value.put(FlickrContract.PhotoListEntry.FARM, photo.getFarm());
                         value.put(FlickrContract.PhotoListEntry.TITLE, photo.getTitle());
-                        photoValues[i] = value;
+                        PhotoUpdateService.insertNewTask(context, value);
                     }
-                    PhotoUpdateService.bulkInsertNewTask(context, photoValues);
+                    PhotoSearchActivity.setPhotoListAdapter(photos);
                 }
                 break;
             }
@@ -71,6 +71,7 @@ public class LoaderPhotoService implements LoaderManager.LoaderCallbacks<ArrayLi
     public void onLoaderReset(Loader<ArrayList<Photo>> loader) {
         switch (loader.getId()) {
             case TASK_LIST_RECENT_PHOTO:
+                PhotoSearchActivity.setPhotoListAdapter(null);
                 break;
 
             case TASK_SEARCH_PHOTO:

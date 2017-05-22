@@ -76,14 +76,14 @@ public class AsyncLoaderPhoto {
 
             Cursor cursorPhotoList;
             String valuePhoto;
+            int valuePage;
 
             @Override
             protected void onStartLoading() {
                 if (args == null) return;
-
                 String idArgs = args.getString(FlickrContract.PhotoListEntry.TITLE);
-
-                if (valuePhoto.equalsIgnoreCase(idArgs) && cursorPhotoList != null) {
+                valuePage = args.getInt(NetworkUtils.PAGE_VALUE_KEY);
+                if (valuePhoto != null && valuePhoto.equalsIgnoreCase(idArgs) && cursorPhotoList != null) {
                     deliverResult(cursorPhotoList);
                 } else {
                     valuePhoto = idArgs;
@@ -120,24 +120,18 @@ public class AsyncLoaderPhoto {
     }
 
     @SuppressLint("StaticFieldLeak")
-    public AsyncTaskLoader<ArrayList<Photo>> getPhotoRecentList(final Context context, final Bundle args) {
+    public AsyncTaskLoader<ArrayList<Photo>> getPhotoRecentList(final Context context) {
         return new AsyncTaskLoader<ArrayList<Photo>>(context) {
 
             ArrayList<Photo> cursorPhotoRecentList;
-            int idPhoto;
 
             @Override
             protected void onStartLoading() {
-                if (args == null) return;
 
-                int idArgs = args.getInt(FlickrContract.PhotoListEntry._ID);
-
-                if (idPhoto == idArgs && cursorPhotoRecentList != null) {
+                if (cursorPhotoRecentList != null)
                     deliverResult(cursorPhotoRecentList);
-                } else {
-                    idPhoto = idArgs;
+                else
                     forceLoad();
-                }
             }
 
             @Override
@@ -223,17 +217,17 @@ public class AsyncLoaderPhoto {
 
             ArrayList<Photo> photoSearchList;
             String valuePhoto;
+            int valuePage;
 
             @Override
             protected void onStartLoading() {
                 if (args == null) return;
-
-                String idArgs = args.getString(FlickrContract.PhotoListEntry.TITLE);
-
-                if (valuePhoto.equalsIgnoreCase(idArgs) && photoSearchList != null) {
+                String valueArgs = args.getString(FlickrContract.PhotoListEntry.TITLE);
+                valuePage = args.getInt(NetworkUtils.PAGE_VALUE_KEY);
+                if (valuePhoto != null && valuePhoto.equalsIgnoreCase(valueArgs) && photoSearchList != null) {
                     deliverResult(photoSearchList);
                 } else {
-                    valuePhoto = idArgs;
+                    valuePhoto = valueArgs;
                     forceLoad();
                 }
             }
@@ -241,7 +235,7 @@ public class AsyncLoaderPhoto {
             @Override
             public ArrayList<Photo> loadInBackground() {
                 try {
-                    URL searchURL = NetworkUtils.buildUrlSearch(valuePhoto);
+                    URL searchURL = NetworkUtils.buildUrlSearch(valuePhoto, valuePage);
                     try {
                         String photoSearchResult = NetworkUtils.getResponseFromHttpUrl(searchURL);
                         return FlickrJsonUtils.getListSearchPhotoFromJson(photoSearchResult);

@@ -40,7 +40,6 @@ public class LoaderPeopleService implements LoaderManager.LoaderCallbacks<ArrayL
         switch (loader.getId()) {
             case TASK_LIST_PEOPLE: {
                 if (photos != null) {
-                    ContentValues[] photoValues = new ContentValues[photos.size()];
                     for (int i = 0; i < photos.size(); i++) {
                         Photo photo = photos.get(i);
                         ContentValues value = new ContentValues();
@@ -50,9 +49,8 @@ public class LoaderPeopleService implements LoaderManager.LoaderCallbacks<ArrayL
                         value.put(FlickrContract.PhotoListEntry.SERVER, photo.getServer());
                         value.put(FlickrContract.PhotoListEntry.FARM, photo.getFarm());
                         value.put(FlickrContract.PhotoListEntry.TITLE, photo.getTitle());
-                        photoValues[i] = value;
+                        PhotoUpdateService.insertNewTask(context, value);
                     }
-                    PhotoUpdateService.bulkInsertNewTask(context, photoValues);
                 }
                 break;
             }
