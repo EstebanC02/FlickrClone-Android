@@ -22,6 +22,7 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.Phot
 
     private static final String TAG = PhotoListAdapter.class.getSimpleName();
 
+    private ProgressBar progressBar;
     private ArrayList<Photo> photoRecentList;
     private Context context;
     private final ListPhotoClickListener onClickListener;
@@ -55,12 +56,15 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.Phot
 
         assert urlPhoto != null;
         String url = urlPhoto.toString();
+        Log.i(TAG, url);
         Picasso.with(context)
                 .load(url)
                 .into(photoViewHolder.photoListImage);
 
-        if(!NetworkUtils.isNetworkAvailable(context))
+        if (!NetworkUtils.isNetworkAvailable(context)) {
             photoViewHolder.errorView.setVisibility(View.VISIBLE);
+            this.progressBar.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -70,25 +74,29 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.Phot
     }
 
     public void setPhotoListData(ArrayList<Photo> photos) {
-        if (photoRecentList != null) {
+        if (photoRecentList != null && photos != null) {
             photos.addAll(photoRecentList);
             photoRecentList = photos;
-        }
-        else {
+        } else {
             photoRecentList = photos;
         }
+
+        if (photoRecentList != null)
+            this.progressBar.setVisibility(View.INVISIBLE);
         notifyDataSetChanged();
+    }
+
+    public void setProgressBar(ProgressBar progress) {
+        this.progressBar = progress;
     }
 
     public class PhotoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final ImageView photoListImage;
-        private final ProgressBar progressBar;
         private final RelativeLayout errorView;
 
         private PhotoViewHolder(View itemView) {
             super(itemView);
             errorView = (RelativeLayout) itemView.findViewById(R.id.rl_error_photo_item);
-            progressBar = (ProgressBar) itemView.findViewById(R.id.pb_photo_item);
             photoListImage = (ImageView) itemView.findViewById(R.id.iv_photo_item);
             photoListImage.setOnClickListener(this);
             itemView.setOnClickListener(this);

@@ -8,6 +8,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.estebanmoncaleano.flickrclone.data.adapter.PhotoCursorAdapter;
 import com.estebanmoncaleano.flickrclone.data.adapter.PhotoListAdapter;
@@ -51,6 +53,7 @@ public class PhotoSearchActivity extends AppCompatActivity implements
 
         if (NetworkUtils.isNetworkAvailable(this)) {
             photoListAdapter = new PhotoListAdapter(this);
+            photoListAdapter.setProgressBar((ProgressBar) findViewById(R.id.pb_photo_search));
             photoListAdapter.setPhotoListData(null);
             recyclerView.setAdapter(photoListAdapter);
         } else {
