@@ -158,7 +158,7 @@ public class FlickrContentProvider extends ContentProvider {
 
             case PERSON:
                 retCursor = db.query(
-                        FlickrContract.PersonListEntry.TABLE_NAME,
+                        FlickrContract.PeopleListEntry.TABLE_NAME,
                         projection,
                         selection,
                         selectionArgs,
@@ -175,7 +175,7 @@ public class FlickrContentProvider extends ContentProvider {
                 String[] selectionPersonArgs = new String[]{id};
 
                 retCursor = db.query(
-                        FlickrContract.PersonListEntry.TABLE_NAME,
+                        FlickrContract.PeopleListEntry.TABLE_NAME,
                         projection,
                         selectionPerson,
                         selectionPersonArgs,
@@ -252,9 +252,9 @@ public class FlickrContentProvider extends ContentProvider {
                 break;
 
             case PERSON:
-                id = db.insert(FlickrContract.PersonListEntry.TABLE_NAME, null, values);
+                id = db.insert(FlickrContract.PeopleListEntry.TABLE_NAME, null, values);
                 if (id > 0) {
-                    returnUri = ContentUris.withAppendedId(FlickrContract.PersonListEntry.CONTENT_URI, id);
+                    returnUri = ContentUris.withAppendedId(FlickrContract.PeopleListEntry.CONTENT_URI, id);
                 } else {
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 }
@@ -328,7 +328,7 @@ public class FlickrContentProvider extends ContentProvider {
 
                 try {
                     for (ContentValues value : values) {
-                        long id = db.insert(FlickrContract.PersonListEntry.TABLE_NAME, null, value);
+                        long id = db.insert(FlickrContract.PeopleListEntry.TABLE_NAME, null, value);
                         if (id != -1) rowsPersonInserted++;
                     }
                     db.setTransactionSuccessful();
@@ -399,7 +399,7 @@ public class FlickrContentProvider extends ContentProvider {
             case PERSON:
                 // directory
                 int rowsPersonDeleted = db.delete(
-                        FlickrContract.PersonListEntry.TABLE_NAME,
+                        FlickrContract.PeopleListEntry.TABLE_NAME,
                         selection,
                         selectionArgs
                 );
@@ -464,7 +464,7 @@ public class FlickrContentProvider extends ContentProvider {
             case PERSON:
                 // directory
                 int rowsPersonUpdated = db.update(
-                        FlickrContract.PersonListEntry.TABLE_NAME,
+                        FlickrContract.PeopleListEntry.TABLE_NAME,
                         values,
                         selection,
                         selectionArgs

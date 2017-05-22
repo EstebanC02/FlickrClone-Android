@@ -41,12 +41,12 @@ public class FlickrContract {
         public static final String MESSAGE = "farm";
     }
 
-    public static final class PersonListEntry implements BaseColumns {
+    public static final class PeopleListEntry implements BaseColumns {
 
         public static final Uri CONTENT_URI =
                 BASE_CONTENT_URI.buildUpon().appendPath(PATH_PERSONS).build();
 
-        public static final String TABLE_NAME = "PersonList";
+        public static final String TABLE_NAME = "PeopleList";
 
         public static final String _ID = "id";
         public static final String USERNAME = "username";

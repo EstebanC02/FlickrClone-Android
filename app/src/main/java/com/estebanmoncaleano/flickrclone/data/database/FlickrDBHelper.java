@@ -23,8 +23,8 @@ public class FlickrDBHelper extends SQLiteOpenHelper {
                 FlickrContract.PhotoListEntry.SERVER + " INTEGER NOT NULL, " +
                 FlickrContract.PhotoListEntry.FARM + " INTEGER NOT NULL, " +
                 FlickrContract.PhotoListEntry.TITLE + " TEXT NOT NULL, " +
-                FlickrContract.PhotoListEntry.DESCRIPTION + " TEXT NOT NULL, " +
-                FlickrContract.PhotoListEntry.DATE + " TEXT NOT NULL);";
+                FlickrContract.PhotoListEntry.DESCRIPTION + " TEXT, " +
+                FlickrContract.PhotoListEntry.DATE + " TEXT);";
 
         db.execSQL(SQL_CREATE_PHOTO_LIST_TABLE);
 
@@ -33,19 +33,19 @@ public class FlickrDBHelper extends SQLiteOpenHelper {
                 FlickrContract.CommentListEntry._ID + " INTEGER PRIMARY KEY, " +
                 FlickrContract.CommentListEntry.PHOTO_ID + " INTEGER NOT NULL, " +
                 FlickrContract.CommentListEntry.AUTHOR + " TEXT NOT NULL, " +
-                FlickrContract.CommentListEntry.AUTHOR_NAME + " TEXT NOT NULL, " +
+                FlickrContract.CommentListEntry.AUTHOR_NAME + " TEXT, " +
                 FlickrContract.CommentListEntry.MESSAGE + " TEXT NOT NULL);";
 
         db.execSQL(SQL_CREATE_COMMENT_LIST_TABLE);
 
         final String SQL_CREATE_PERSON_LIST_TABLE = "CREATE TABLE " +
-                FlickrContract.PersonListEntry.TABLE_NAME + "( " +
-                FlickrContract.PersonListEntry._ID + " TEXT PRIMARY KEY, " +
-                FlickrContract.PersonListEntry.USERNAME + " TEXT NOT NULL, " +
-                FlickrContract.PersonListEntry.REALNAME + " TEXT NOT NULL, " +
-                FlickrContract.PersonListEntry.LOCATION + " TEXT NOT NULL, " +
-                FlickrContract.PersonListEntry.DESCRIPTION + " TEXT NOT NULL, " +
-                FlickrContract.PersonListEntry.PHOTO_URL + " TEXT NOT NULL);";
+                FlickrContract.PeopleListEntry.TABLE_NAME + "( " +
+                FlickrContract.PeopleListEntry._ID + " TEXT PRIMARY KEY, " +
+                FlickrContract.PeopleListEntry.USERNAME + " TEXT NOT NULL, " +
+                FlickrContract.PeopleListEntry.REALNAME + " TEXT, " +
+                FlickrContract.PeopleListEntry.LOCATION + " TEXT, " +
+                FlickrContract.PeopleListEntry.DESCRIPTION + " TEXT, " +
+                FlickrContract.PeopleListEntry.PHOTO_URL + " TEXT);";
 
         db.execSQL(SQL_CREATE_PERSON_LIST_TABLE);
 
@@ -53,10 +53,10 @@ public class FlickrDBHelper extends SQLiteOpenHelper {
                 FlickrContract.GroupListEntry.TABLE_NAME + "( " +
                 FlickrContract.GroupListEntry._ID + " TEXT PRIMARY KEY, " +
                 FlickrContract.GroupListEntry.NAME + " TEXT NOT NULL, " +
-                FlickrContract.GroupListEntry.DESCRIPTION + " TEXT NOT NULL, " +
-                FlickrContract.GroupListEntry.RULES + " TEXT NOT NULL, " +
-                FlickrContract.GroupListEntry.MEMBERS + " INTEGER NOT NULL, " +
-                FlickrContract.GroupListEntry.TOPIC_COUNT + " INTEGER NOT NULL);";
+                FlickrContract.GroupListEntry.DESCRIPTION + " TEXT, " +
+                FlickrContract.GroupListEntry.RULES + " TEXT, " +
+                FlickrContract.GroupListEntry.MEMBERS + " INTEGER, " +
+                FlickrContract.GroupListEntry.TOPIC_COUNT + " INTEGER);";
 
         db.execSQL(SQL_CREATE_GROUP_LIST_TABLE);
     }
@@ -65,7 +65,7 @@ public class FlickrDBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + FlickrContract.PhotoListEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + FlickrContract.CommentListEntry.TABLE_NAME);
-        db.execSQL("DROP TABLE IF EXISTS " + FlickrContract.PersonListEntry.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + FlickrContract.PeopleListEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + FlickrContract.GroupListEntry.TABLE_NAME);
         onCreate(db);
     }
