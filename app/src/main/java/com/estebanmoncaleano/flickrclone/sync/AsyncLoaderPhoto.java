@@ -120,14 +120,16 @@ public class AsyncLoaderPhoto {
     }
 
     @SuppressLint("StaticFieldLeak")
-    public AsyncTaskLoader<ArrayList<Photo>> getPhotoRecentList(final Context context) {
+    public AsyncTaskLoader<ArrayList<Photo>> getPhotoRecentList(final Context context, final Bundle args) {
         return new AsyncTaskLoader<ArrayList<Photo>>(context) {
 
             ArrayList<Photo> cursorPhotoRecentList;
+            int valuePage;
 
             @Override
             protected void onStartLoading() {
-
+                valuePage = args.getInt(NetworkUtils.PAGE_VALUE_KEY);
+                Log.i(TAG, "valuePage: " + valuePage);
                 if (cursorPhotoRecentList != null)
                     deliverResult(cursorPhotoRecentList);
                 else
@@ -137,7 +139,7 @@ public class AsyncLoaderPhoto {
             @Override
             public ArrayList<Photo> loadInBackground() {
                 try {
-                    URL searchURL = NetworkUtils.buildUrlGetRecent();
+                    URL searchURL = NetworkUtils.buildUrlGetRecent(valuePage);
                     try {
                         String photoSearchResult = NetworkUtils.getResponseFromHttpUrl(searchURL);
                         return FlickrJsonUtils.getListRecentPhotoFromJson(photoSearchResult);

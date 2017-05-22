@@ -2,10 +2,10 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rl_photo_search_view"
+    android:id="@+id/rl_photo_recent_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.estebanmoncaleano.flickrclone.PhotoSearchActivity">
+    tools:context="com.estebanmoncaleano.flickrclone.PhotoRecentActivity">
 
     <ProgressBar
         android:id="@+id/pb_photo_search"
@@ -20,9 +20,11 @@
         android:visibility="invisible" />
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/srl_photos_list"
+        android:id="@+id/srl_photos_recent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_app"
+        tools:context="com.estebanmoncaleano.flickrclone.PhotoRecentActivity">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_photos_list"
@@ -31,5 +33,4 @@
             android:layout_gravity="center" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
-
 </RelativeLayout>

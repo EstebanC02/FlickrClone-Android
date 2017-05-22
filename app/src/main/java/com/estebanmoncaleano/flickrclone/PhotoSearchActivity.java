@@ -8,7 +8,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.ProgressBar;
 
 import com.estebanmoncaleano.flickrclone.data.adapter.PhotoCursorAdapter;
@@ -63,10 +62,10 @@ public class PhotoSearchActivity extends AppCompatActivity implements
         }
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
 
-        loadRecentPhotosList();
+        loadSearchPhotosList();
     }
 
-    private void loadRecentPhotosList() {
+    private void loadSearchPhotosList() {
         Bundle bundle = new Bundle();
         bundle.putString(FlickrContract.PhotoListEntry.TITLE, valuePhoto);
         bundle.putInt(NetworkUtils.PAGE_VALUE_KEY, valuePage++);
@@ -95,7 +94,7 @@ public class PhotoSearchActivity extends AppCompatActivity implements
 
     @Override
     public void onRefresh() {
-        loadRecentPhotosList();
+        loadSearchPhotosList();
         swipeRefreshLayout.setRefreshing(false);
     }
 }

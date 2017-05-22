@@ -76,10 +76,12 @@ public class NetworkUtils {
 
     private final static String PARAM_METHOD_GETRECENT = "flickr.photos.getRecent";
 
-    public static URL buildUrlGetRecent() {
+    public static URL buildUrlGetRecent(int valuePage) {
         Uri builtUri = Uri.parse(FLICKR_BASE_URL).buildUpon()
                 .appendQueryParameter(PARAM_METHOD_KEY, PARAM_METHOD_GETRECENT)
                 .appendQueryParameter(PARAM_FLICKR_API_KEY, FLICKR_API_KEY)
+                .appendQueryParameter(PARAM_PER_PAGE, PARAM_PER_PAGE_VALUE)
+                .appendQueryParameter(PARAM_PAGE, String.valueOf(valuePage))
                 .appendQueryParameter(PARAM_FORMAT, PARAM_JSON)
                 .appendQueryParameter(PARAM_NO_JSON_CALLBACK_KEY, PARAM_NO_JSON_CALLBACK)
                 .build();
@@ -99,7 +101,6 @@ public class NetworkUtils {
     private final static String PARAM_METHOD_SEARCH = "flickr.photos.search";
 
     public static URL buildUrlSearch(String valueSearch, int valuePage) {
-        Log.i(TAG, "Value page: " + String.valueOf(valuePage));
         Uri builtUri = Uri.parse(FLICKR_BASE_URL).buildUpon()
                 .appendQueryParameter(PARAM_METHOD_KEY, PARAM_METHOD_SEARCH)
                 .appendQueryParameter(PARAM_FLICKR_API_KEY, FLICKR_API_KEY)

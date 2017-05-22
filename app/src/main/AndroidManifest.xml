@@ -67,7 +67,15 @@
             android:name=".data.database.service.PeopleUpdateService"
             android:exported="false" />
 
-        <activity android:name=".PhotoSearchActivity"
+        <activity
+            android:name=".PhotoSearchActivity"
+            android:theme="@style/SearchTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".PhotoRecentActivity"
             android:theme="@style/SearchTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

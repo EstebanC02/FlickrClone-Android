@@ -5,8 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.util.Log;
 
-import com.estebanmoncaleano.flickrclone.PhotoSearchActivity;
 import com.estebanmoncaleano.flickrclone.data.adapter.PhotoListAdapter;
 import com.estebanmoncaleano.flickrclone.data.database.FlickrContract;
 import com.estebanmoncaleano.flickrclone.data.database.service.PhotoUpdateService;
@@ -33,7 +33,7 @@ public class LoaderPhotoService implements LoaderManager.LoaderCallbacks<ArrayLi
         AsyncLoaderPhoto loaderPhoto = new AsyncLoaderPhoto();
         switch (id) {
             case TASK_LIST_RECENT_PHOTO:
-                return loaderPhoto.getPhotoRecentList(context);
+                return loaderPhoto.getPhotoRecentList(context, args);
 
             case TASK_SEARCH_PHOTO:
                 return loaderPhoto.getPhotoSearchList(context, args);
@@ -48,6 +48,9 @@ public class LoaderPhotoService implements LoaderManager.LoaderCallbacks<ArrayLi
         switch (loader.getId()) {
 
             case TASK_LIST_RECENT_PHOTO:
+                if (photos != null)
+                    photoListAdapter.setPhotoListData(photos);
+                Log.i(LoaderPhotoService.class.getName(), "Size photos: " + photoListAdapter.getItemCount());
                 break;
 
             case TASK_SEARCH_PHOTO: {
@@ -74,6 +77,7 @@ public class LoaderPhotoService implements LoaderManager.LoaderCallbacks<ArrayLi
     public void onLoaderReset(Loader<ArrayList<Photo>> loader) {
         switch (loader.getId()) {
             case TASK_LIST_RECENT_PHOTO:
+                photoListAdapter.setPhotoListData(null);
                 break;
 
             case TASK_SEARCH_PHOTO:

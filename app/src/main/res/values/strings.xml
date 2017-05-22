@@ -16,8 +16,10 @@
     <string name="spinner_message_error">Please selected a item from de spinner</string>
     <string name="edit_text_message_error">Please insert a valid value</string>
 
-
     <!-- PhotoSearchActivity -->
     <string name="message_internet_disable">Image not available. You can click here to see more information if it is available</string>
     <string name="message_not_info_available">Sorry, not information available</string>
+
+    <!-- PhotoRecentActivity -->
+    <string name="action_bar_title_recent">Recent</string>
 </resources>

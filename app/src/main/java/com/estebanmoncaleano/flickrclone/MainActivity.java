@@ -1,7 +1,6 @@
 package com.estebanmoncaleano.flickrclone;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -36,11 +35,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onSearch(View view) {
-        if(spinner.getSelectedItemPosition() == 0)
+        if (spinner.getSelectedItemPosition() == 0)
             showMessage(getString(R.string.spinner_message_error));
         else if (searchValue.getText().toString().isEmpty())
             searchValue.setError(getString(R.string.edit_text_message_error));
-        else if(spinner.getSelectedItemPosition() == 1)
+        else if (spinner.getSelectedItemPosition() == 1)
             launchSearchPhoto(searchValue.getText().toString());
         else if (spinner.getSelectedItemPosition() == 2)
             launchSearchPeople(searchValue.getText().toString());
@@ -49,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onShowRecent(View view) {
+        Intent intent = new Intent(this, PhotoRecentActivity.class);
+        startActivity(intent);
     }
 
     private void launchSearchPhoto(String searchPhoto) {

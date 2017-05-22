@@ -2,7 +2,6 @@ package com.estebanmoncaleano.flickrclone.data.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +55,6 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.Phot
 
         assert urlPhoto != null;
         String url = urlPhoto.toString();
-        Log.i(TAG, url);
         Picasso.with(context)
                 .load(url)
                 .into(photoViewHolder.photoListImage);
