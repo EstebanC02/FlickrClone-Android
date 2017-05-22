@@ -187,6 +187,8 @@ public class FlickrJsonUtils {
         final String OWM_PERSON = "people";
         final String OWM_ID = "id";
         final String OWM_USERNAME = "username";
+        final String OWM_REALNAME = "realname";
+        final String OWM_LOCATION = "location";
         final String OWM_CONTENT = "_content";
         final String OWM_DESCRIPTION = "description";
         final String OWM_PHOTO_URL = "photosurl";
@@ -201,8 +203,11 @@ public class FlickrJsonUtils {
             peopleJsonInfo = jsonObject.getJSONObject(OWM_USERNAME);
             people.setUsername(peopleJsonInfo.getString(OWM_CONTENT));
 
-            peopleJsonInfo = jsonObject.getJSONObject(OWM_DESCRIPTION);
-            people.setDescription(peopleJsonInfo.getString(OWM_CONTENT));
+            peopleJsonInfo = jsonObject.getJSONObject(OWM_REALNAME);
+            people.setRealname(peopleJsonInfo.getString(OWM_CONTENT));
+
+            peopleJsonInfo = jsonObject.getJSONObject(OWM_LOCATION);
+            people.setLocation(peopleJsonInfo.getString(OWM_CONTENT));
 
             peopleJsonInfo = jsonObject.getJSONObject(OWM_DESCRIPTION);
             people.setDescription(peopleJsonInfo.getString(OWM_CONTENT));
@@ -315,7 +320,7 @@ public class FlickrJsonUtils {
             group.setDescription(groupJsonInfo.getString(OWM_CONTENT));
 
             groupJsonInfo = jsonObject.getJSONObject(OWM_RULES);
-            group.setDescription(groupJsonInfo.getString(OWM_CONTENT));
+            group.setRules(groupJsonInfo.getString(OWM_CONTENT));
 
             groupJsonInfo = jsonObject.getJSONObject(OWM_MEMBERS);
             group.setMembers(groupJsonInfo.getInt(OWM_CONTENT));
