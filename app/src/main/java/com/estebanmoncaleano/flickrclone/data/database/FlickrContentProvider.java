@@ -69,7 +69,6 @@ public class FlickrContentProvider extends ContentProvider {
                 // single item type
                 return "vnd.android.cursor.item" + "/" + FlickrContract.AUTHORITY + "/" + FlickrContract.PATH_COMMENTS;
 
-
             case PERSON:
                 // directory
                 return "vnd.android.cursor.dir" + "/" + FlickrContract.AUTHORITY + "/" + FlickrContract.PATH_PERSONS;

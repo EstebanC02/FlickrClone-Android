@@ -10,3 +10,5 @@
 app/src/main/res/values/keys.xml
 
 app/release/app-release.apk
+
+*.apk
